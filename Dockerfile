@@ -7,5 +7,5 @@ RUN apk update && \
     go build -v -ldflags="-s -w" -o /goproxy-php
 
 FROM alpine
-COPY /goproxy-php /goproxy-php
+COPY --from=0 /goproxy-php /goproxy-php
 ENTRYPOINT /goproxy-php
