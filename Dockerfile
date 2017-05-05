@@ -4,7 +4,6 @@ RUN apk add --no-cache curl && \
     cd goproxy-server.php-go && \
     sed -i "s#123456#2Q43D9xVyQAOuvc7Iwjm#" index.go && \
     env CGO_ENABLED=0 && \
-    mkdir -p /goproxy-php && \
     go build -v -ldflags="-s -w" -o /goproxy-php
 
 FROM alpine
