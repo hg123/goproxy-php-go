@@ -1,11 +1,12 @@
 FROM golang:alpine
-RUN apk add --no-cache curl && \
-    curl -L "https://github.com/523860169/gop-php-go/archive/master.tar.gz" | gzip -d | tar xv && \
-    cd gop-php-go-master && \
+RUN apk update && \
+    apk add curl && \
+    curl -L "https://github.com/phuslu/goproxy/archive/server.php-go.tar.gz" | gzip -d | tar xv && \
+    cd goproxy-server.php-go && \
+    sed -i "s#123456#2Q43D9xVyQAOuvc7Iwjm#" index.go
     env CGO_ENABLED=0 \
-    go build -v -ldflags="-s -w" -o goproxy-php
+    go build -v -ldflags="-s -w" -o /goproxy-php
 
-FROM alpine:3.5
-COPY goproxy-php goproxy-php
-EXPOSE 8080
-ENTRYPOINT goproxy-php
+FROM alpine
+COPY --from=0 /goproxy-php /goproxy-php
+ENTRYPOINT /goproxy-php
