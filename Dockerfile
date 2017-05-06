@@ -6,6 +6,5 @@ RUN apk add --no-cache curl && \
     env CGO_ENABLED=0 && \
     go build -v -ldflags="-s -w" -o /goproxy-php
 
-FROM alpine:3.5
 EXPOSE 8080
 ENTRYPOINT /goproxy-php
